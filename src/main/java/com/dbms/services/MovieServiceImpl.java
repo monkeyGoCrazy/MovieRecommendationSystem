@@ -18,19 +18,23 @@ public class MovieServiceImpl implements MovieService{
         this.movieRepository = movieRepository;
     }
     @Override
-    public Iterable<Movie> getMovieByGenre(String genre) {
-        return movieRepository.getMovieByGenre(genre);
+    public Iterable<Movie> findMovieByGenre(String genre) {
+        return movieRepository.findMovieByGenre(genre);
     }
     @Override
-    public Iterable<Movie> getMovieByDirector(String director) {
-        return movieRepository.getMovieByDirector(director);
+    public Iterable<Movie> findMovieByDirector(String director) {
+        return movieRepository.findMovieByDirector(director);
     }
     @Override
     public Page<Movie> findAll(Pageable pageable) {
         return movieRepository.findAll(pageable);
     }
     @Override
-    public Movie getMovieByTitle(String title) {
-        return movieRepository.getMovieByTitle(title);
+    public Movie findMovieByTitle(String title) {
+        return movieRepository.findMovieByTitle(title);
+    }
+    @Override
+    public Iterable<Movie> findMovieByRating(float rating) {
+        return movieRepository.findByRatingGreaterThan(rating);
     }
 }

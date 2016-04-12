@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Integer> {
-    public Movie getMovieByTitle(@Param("title") String title);
-    public Iterable<Movie> getMovieByGenre(@Param("genre") String genre);
-    public Iterable<Movie> getMovieByDirector(@Param("director") String director);
-
+    public Movie findMovieByTitle(@Param("title") String title);
+    public Iterable<Movie> findMovieByGenre(@Param("genre") String genre);
+    public Iterable<Movie> findMovieByDirector(@Param("director") String director);
+    public Iterable<Movie> findByRatingGreaterThan(@Param("rating") float rating);
 }

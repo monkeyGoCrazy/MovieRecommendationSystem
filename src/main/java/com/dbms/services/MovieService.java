@@ -10,9 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 public interface MovieService {
-    Movie getMovieByTitle(String title);
-    Iterable<Movie> getMovieByGenre(String genre);
-    Iterable<Movie> getMovieByDirector(String director);
+    Movie findMovieByTitle(String title);
+    Iterable<Movie> findMovieByGenre(String genre);
+    Iterable<Movie> findMovieByDirector(String director);
+    Iterable<Movie> findMovieByRating(float rating);
     Page<Movie> findAll(Pageable pageable);
 //    Movie saveMovie(Movie movie);
 //    void deleteMovie(Integer mid);
