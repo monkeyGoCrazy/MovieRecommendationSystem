@@ -4,7 +4,8 @@ import com.dbms.repositories.MovieRepository;
 import com.dbms.domain.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 /**
  * Created by mengleisun on 3/15/16.
  */
@@ -25,8 +26,8 @@ public class MovieServiceImpl implements MovieService{
         return movieRepository.getMovieByDirector(director);
     }
     @Override
-    public Iterable<Movie> listAllMovies() {
-        return movieRepository.findAll();
+    public Page<Movie> findAll(Pageable pageable) {
+        return movieRepository.findAll(pageable);
     }
     @Override
     public Movie getMovieByTitle(String title) {
