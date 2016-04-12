@@ -24,9 +24,14 @@ public class MovieController {
         Iterable<Movie> movies = movieService.listAllMovies();
         return movies;
     }
-    @RequestMapping("movie/{id}")
-    public @ResponseBody Movie selectMovie(@PathVariable Integer id) {
-        Movie movie = movieService.getMovieByMid(id);
+    @RequestMapping("movie/{title}")
+    public @ResponseBody Movie selectMoviebyTitle(@PathVariable String title) {
+        Movie movie = movieService.getMovieByTitle(title);
         return movie;
+    }
+    @RequestMapping("movie/genre/{genre}")
+    public @ResponseBody Iterable<Movie> selectMovieByGenre(@PathVariable String genre) {
+        Iterable<Movie> movies = movieService.getMovieByGenre(genre);
+        return movies;
     }
 }

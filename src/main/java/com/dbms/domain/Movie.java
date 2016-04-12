@@ -13,25 +13,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 public class Movie {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer mid;
     private Float rating;
     private String director;
     private String writer;
     private String genre;
     private String language;
     private Integer year;
+    @Id
     private String title;
     private String mpaa;
     private Integer length;
     private String budget;
     private String productionCompany;
 
-    public Integer getMid() {
-        return mid;
-    }
-    public void setMid(Integer mid) { this.mid = mid; }
+
     public void setRating(Float rating) {
         this.rating = rating;
     }

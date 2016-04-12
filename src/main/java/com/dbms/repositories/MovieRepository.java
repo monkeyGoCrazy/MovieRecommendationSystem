@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
-    public Movie getMovieByMid(@Param("id") Integer mid);
+    public Movie getMovieByTitle(@Param("title") String title);
+    public Iterable<Movie> getMovieByGenre(@Param("genre") String genre);
+    public Iterable<Movie> getMovieByDirector(@Param("director") String director);
 
 }

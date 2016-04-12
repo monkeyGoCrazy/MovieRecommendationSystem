@@ -16,13 +16,20 @@ public class MovieServiceImpl implements MovieService{
     public void setMovieRepository(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
-
+    @Override
+    public Iterable<Movie> getMovieByGenre(String genre) {
+        return movieRepository.getMovieByGenre(genre);
+    }
+    @Override
+    public Iterable<Movie> getMovieByDirector(String director) {
+        return movieRepository.getMovieByDirector(director);
+    }
     @Override
     public Iterable<Movie> listAllMovies() {
         return movieRepository.findAll();
     }
     @Override
-    public Movie getMovieByMid(Integer id) {
-        return movieRepository.getMovieByMid(id);
+    public Movie getMovieByTitle(String title) {
+        return movieRepository.getMovieByTitle(title);
     }
 }
