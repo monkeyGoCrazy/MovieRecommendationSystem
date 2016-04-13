@@ -5,9 +5,6 @@ package com.dbms.domain;
  */
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Version;
-import java.math.BigDecimal;
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
+import javax.servlet.http.HttpSession;
 /**
  * Created by mengleisun on 3/15/16.
  */
@@ -26,7 +27,7 @@ public class MovieController {
     public void setMovieService(MovieService movieService) {this.movieService = movieService;}
 
     @RequestMapping(value = "/movie/page/{page}", method = RequestMethod.GET)
-    public Page<Movie> findAll(@PathVariable int page) {
+    public Page<Movie> findAll(@PathVariable int page, HttpSession sessionObj) {
         Page<Movie> movies = movieService.findAll(new PageRequest(page,20));
         return movies;
     }
