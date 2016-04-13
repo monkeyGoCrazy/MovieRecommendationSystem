@@ -26,7 +26,7 @@ public class MovieServiceImpl implements MovieService{
         return movieRepository.findMovieByDirector(director);
     }
     @Override
-    public Page<Movie> findAll(Pageable pageable) {
+    public Page<Movie> findAll(Pageable pageable, String username) {
         return movieRepository.findAll(pageable);
     }
     @Override

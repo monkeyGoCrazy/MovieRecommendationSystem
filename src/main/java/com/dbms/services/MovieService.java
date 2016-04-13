@@ -14,7 +14,7 @@ public interface MovieService {
     Iterable<Movie> findMovieByGenre(String genre);
     Iterable<Movie> findMovieByDirector(String director);
     Iterable<Movie> findMovieByRating(float rating);
-    Page<Movie> findAll(Pageable pageable);
+    Page<Movie> findAll(Pageable pageable,String username);
 //    Movie saveMovie(Movie movie);
 //    void deleteMovie(Integer mid);
 }

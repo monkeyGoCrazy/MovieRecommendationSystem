@@ -28,7 +28,7 @@ public class MovieController {
 
     @RequestMapping(value = "/movie/page/{page}", method = RequestMethod.GET)
     public Page<Movie> findAll(@PathVariable int page, HttpSession sessionObj) {
-        Page<Movie> movies = movieService.findAll(new PageRequest(page,20));
+        Page<Movie> movies = movieService.findAll(new PageRequest(page,20),(String)sessionObj.getAttribute("username"));
         return movies;
     }
     @RequestMapping(value = "movie/title/{title}", method = RequestMethod.GET)
