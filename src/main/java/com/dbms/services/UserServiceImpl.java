@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
     private UsersRepository usersRepository;
 
-    @Autowired
-    public void setMovieRepository(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
+//    @Autowired
+//    public void setMovieRepository(UsersRepository usersRepository) {
+//        this.usersRepository = usersRepository;
+//    }
 
     @Override
     public Users findByUsername(String username) {
@@ -26,18 +26,22 @@ public class UserServiceImpl implements UserService{
     public Iterable<Users> findAll() {
         return usersRepository.findAll();
     }
-    @Override
-    public boolean setPassword(String username, String password) {
-        return usersRepository.setPassword(username,password);
-    }
-    @Override
-    public boolean insertUser(String username, String password, String email, String firstname, String lastname){
-        return usersRepository.insertUser(username,password,email,firstname,lastname);
-    }
+//    @Override
+//    public boolean setPassword(String username, String password) {
+//        return usersRepository.setPassword(username,password);
+//    }
+//    @Override
+//    public boolean insertUser(String username, String password, String email, String firstname, String lastname){
+//        return usersRepository.insertUser(username,password,email,firstname,lastname);
+//    }
     @Override
     public boolean matchPassword(String username, String password) {
-        Users user = usersRepository.findByUsername(username);
-        if (user.getPassword().equals(password)) {
+        System.out.println(username);
+        Users user = usersRepository.findOne();
+        System.out.println(user.getPassword());
+        if (user == null) {
+            return false;
+        } else if (user.getPassword().equals(password)) {
             return true;
         } else {
             return false;

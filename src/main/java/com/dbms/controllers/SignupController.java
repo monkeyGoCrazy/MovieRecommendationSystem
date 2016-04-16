@@ -13,12 +13,12 @@ import javax.servlet.http.HttpSession;
  * Created by mengleisun on 4/12/16.
  */
 public class SignupController {
-    private UserService userService;
-    @Autowired
-    public void setUserService(UserService userService) {this.userService = userService;}
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public boolean login(@RequestBody Users user) {
-        return userService.insertUser(user.getUsername(),user.getPassword(),user.getEmail(),
-                user.getFirstname(),user.getLastname());
-    }
+//    private UserService userService;
+//    @Autowired
+//    public void setUserService(UserService userService) {this.userService = userService;}
+//    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+//    public boolean login(@RequestBody Users user) {
+//        return userService.insertUser(user.getUsername(),user.getPassword(),user.getEmail(),
+//                user.getFirstname(),user.getLastname());
+//    }
 }

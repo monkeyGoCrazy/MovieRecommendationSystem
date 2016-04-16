@@ -12,6 +12,7 @@ import java.util.Date;
 @Entity
 @XmlRootElement
 public class Actress {
+    @Id
     private String actress;
     public void setActress(String actress) {this.actress = actress;}
     public String getActress() { return this.actress; }

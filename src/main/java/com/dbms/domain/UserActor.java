@@ -2,6 +2,7 @@ package com.dbms.domain;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 /**
  * Created by mengleisun on 4/12/16.
@@ -9,7 +10,7 @@ import java.util.Date;
 @Entity
 @XmlRootElement
 
-public class UserActor {
+public class UserActor implements Serializable {
     @Id
     private String username;
     @Id

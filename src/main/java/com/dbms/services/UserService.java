@@ -10,6 +10,6 @@ public interface UserService {
     Users findByUsername(String username);
     Iterable<Users> findAll();
     boolean matchPassword(String username, String password);
-    boolean setPassword(String username, String password);
-    boolean insertUser(String username, String password, String email, String firstname, String lastname);
+//    boolean setPassword(String username, String password);
+//    boolean insertUser(String username, String password, String email, String firstname, String lastname);
 }

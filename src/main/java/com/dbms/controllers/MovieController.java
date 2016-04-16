@@ -9,10 +9,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import javax.servlet.http.HttpSession;
@@ -25,22 +22,26 @@ public class MovieController {
 
     @Autowired
     public void setMovieService(MovieService movieService) {this.movieService = movieService;}
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/movie/page/{page}", method = RequestMethod.GET)
-    public Page<Movie> findAll(@PathVariable int page, HttpSession sessionObj) {
-        Page<Movie> movies = movieService.findAll(new PageRequest(page,20),(String)sessionObj.getAttribute("username"));
+    public Page<Movie> findAll(@PathVariable int page) {
+        Page<Movie> movies = movieService.findAll(new PageRequest(page,20),"abc");
         return movies;
     }
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "movie/title/{title}", method = RequestMethod.GET)
     public @ResponseBody Movie selectMoviebyTitle(@PathVariable String title) {
         Movie movie = movieService.findMovieByTitle(title);
         return movie;
     }
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "movie/genre/{genre}", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Movie> selectMovieByGenre(@PathVariable String genre) {
+    public @ResponseBody Iterable<Movie> selectMovieByGenre(@PathVariable String genre, @RequestHeader("Authorization") String auto) {
+        System.out.println(auto);
         Iterable<Movie> movies = movieService.findMovieByGenre(genre);
         return movies;
     }
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "movie/rating/{rating}", method = RequestMethod.GET)
     public @ResponseBody Iterable<Movie> selectMovieByRating(@PathVariable float rating) {
         Iterable<Movie> movies = movieService.findMovieByRating(rating);

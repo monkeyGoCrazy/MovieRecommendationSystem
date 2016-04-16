@@ -3,12 +3,11 @@ import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.Id;
 import java.util.Date;
-/**
- * Created by mengleisun on 4/12/16.
- */
+
 @Entity
 @XmlRootElement
 public class Rating {
+    @Id
     private String movie;
     private float rating;
     private int votes;

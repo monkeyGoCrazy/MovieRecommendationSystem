@@ -5,6 +5,7 @@ package com.dbms.domain;
  */
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -22,8 +23,6 @@ public class Movie {
     private Integer length;
     private String budget;
     private String productionCompany;
-
-
     public void setRating(Float rating) {
         this.rating = rating;
     }
