@@ -22,10 +22,10 @@ public class UserServiceImpl implements UserService{
         System.out.println(username);
         return usersRepository.findByUsername(username);
     }
-//    @Override
-//    public Iterable<Urs> findAll() {
-//        return ursRepository.findAll();
-//    }
+    @Override
+    public Iterable<Users> findAll() {
+        return usersRepository.findAll();
+    }
 //    @Override
 //    public boolean setPassword(String username, String password) {
 //        return usersRepository.setPassword(username,password);
@@ -37,18 +37,16 @@ public class UserServiceImpl implements UserService{
 
 
 
-//    @Override
-//    public boolean matchPassword(String username, String password) {
-//        System.out.println(username);
-//        IterUsers user = usersRepository.findByUsername(username);
-//        System.out.println(user.getPassword());
-//        if (user == null) {
-//            return false;
-//        } else if (user.getPassword().equals(password)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    @Override
+    public boolean matchPassword(String username, String password) {
+        Users user = findByUsername(username);
+        if (user == null) {
+            return false;
+        } else if (user.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

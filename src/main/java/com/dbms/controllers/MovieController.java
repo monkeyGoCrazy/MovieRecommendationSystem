@@ -100,11 +100,6 @@ public class MovieController {
     public @ResponseBody List<Movie> findByTopVotes(@PathVariable("votes") int votes) {
         return movieService.findByTopVotes(votes,new PageRequest(0,20));
     }
-//    @CrossOrigin(origins = "http://localhost:8080")
-//    @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
-//    public @ResponseBody Users getUser(@PathVariable String username) {
-//        return userService.findByUsername(username);
-//    }
     @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/main/", method = RequestMethod.GET)
     public @ResponseBody List<Movie> getUser() {

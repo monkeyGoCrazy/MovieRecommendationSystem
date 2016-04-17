@@ -9,8 +9,8 @@ import com.dbms.domain.Users;
 
 public interface UserService {
     Users findByUsername(String username);
-//    Iterable<Urs> findAll();
-//    boolean matchPassword(String username, String password);
+    Iterable<Users> findAll();
+    boolean matchPassword(String username, String password);
 //    boolean setPassword(String username, String password);
 //    boolean insertUser(String username, String password, String email, String firstname, String lastname);
 }
