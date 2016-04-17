@@ -1,7 +1,9 @@
 package com.dbms.controllers;
 
+import com.dbms.domain.Users;
+import com.dbms.services.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -10,9 +12,11 @@ import java.security.Principal;
  */
 @Controller
 public class UserController {
-//    @RequestMapping("/user")
-//    public Principal user(Principal user) {
-//        return user;
-
-//    }
+    private UserService userService;
+    @CrossOrigin(origins = "http://localhost:8080")
+    @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
+    public @ResponseBody
+    Users getUser(@PathVariable String username) {
+        return userService.findByUsername(username);
+    }
 }

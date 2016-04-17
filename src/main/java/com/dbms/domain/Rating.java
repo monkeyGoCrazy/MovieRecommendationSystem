@@ -1,14 +1,20 @@
 package com.dbms.domain;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
 @XmlRootElement
+@Table(name = "Rating")
 public class Rating {
     @Id
-    private String movie;
+    @Column(name ="movietitle")
+    private String movietitle;
+
+
     private float rating;
     private int votes;
     private float r1;
@@ -21,8 +27,8 @@ public class Rating {
     private float r8;
     private float r9;
     private float r10;
-    public String getMovie() {return this.movie;}
-    public void setMovie(String movie) {this.movie = movie;}
+    public String getMovietitle() {return this.movietitle;}
+    public void setMovietitle(String movietitle) {this.movietitle = movietitle;}
     public float getRating() {return this.rating;}
     public void setRating(float rating) {this.rating = rating;}
     public int getVotes() {return this.votes;}

@@ -3,26 +3,55 @@ package com.dbms.domain;
 /**
  * Created by mengleisun on 3/14/16.
  */
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
+@Table(name = "Movie")
 public class Movie {
+    @Id
+    @Column(name="title")
+    private String title;
     private Float rating;
     private String director;
     private String writer;
     private String genre;
     private String language;
     private Integer year;
-    @Id
-    private String title;
     private String mpaa;
     private Integer length;
     private String budget;
     private String productionCompany;
+
+    @OneToOne()
+    @JoinColumn(name="title",referencedColumnName = "title")
+    private Pictures pictures;
+
+    @OneToOne()
+    @JoinColumn(name="title",referencedColumnName = "movietitle")
+    private Rating ratings;
+
+    @OneToMany()
+    @JoinColumn(name="title",referencedColumnName = "movie")
+    private ActorGenreMovie actorGenreMovie;
+
+    @OneToMany()
+    @JoinColumn(name="title",referencedColumnName = "movie")
+    private ActressGenreMovie actressGenreMovie;
+
+    public void setActressGenreMovie(ActressGenreMovie actressGenreMovie) {this.actressGenreMovie = actressGenreMovie;}
+    public ActressGenreMovie getActressGenreMovie() {return actressGenreMovie;}
+
+    public void setActorGenreMovie(ActorGenreMovie actorGenreMovie) {this.actorGenreMovie = actorGenreMovie;}
+    public ActorGenreMovie getActorGenreMovie() {return actorGenreMovie;}
+
+    public void setRatings(Rating ratings) {this.pictures = pictures;}
+    public Rating getRatings() {return ratings;}
+
+    public void setPictures(Pictures pictures) {this.pictures = pictures;}
+    public Pictures getPictures() {return this.pictures;}
     public void setRating(Float rating) {
         this.rating = rating;
     }

@@ -48,7 +48,7 @@ public class OracleConfiguration {
         dataSource.setUser(username);
         dataSource.setPassword(password);
         dataSource.setURL(url);
-        dataSource.setImplicitCachingEnabled(true);
+        dataSource.setImplicitCachingEnabled(false);
         dataSource.setFastConnectionFailoverEnabled(true);
         return dataSource;
     }

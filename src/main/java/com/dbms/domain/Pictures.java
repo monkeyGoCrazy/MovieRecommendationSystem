@@ -1,5 +1,8 @@
 package com.dbms.domain;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.Id;
 import java.util.Date;
@@ -8,9 +11,11 @@ import java.util.Date;
  */
 @Entity
 @XmlRootElement
+@Table(name = "Pictures")
 public class Pictures {
     private String image_url;
     @Id
+    @Column(name="title")
     private String title;
     private String movie_url;
     public void setImage_url(String image_url) {this.image_url = image_url;}

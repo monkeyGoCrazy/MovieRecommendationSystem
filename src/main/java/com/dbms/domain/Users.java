@@ -1,5 +1,6 @@
 package com.dbms.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
  */
 @Entity
 @XmlRootElement
+@Table(name = "Users")
 public class Users {
     @Id
     private String username;

@@ -1,7 +1,6 @@
 package com.dbms.services;
 
 import com.dbms.domain.Users;
-import com.dbms.repositories.MovieRepository;
 import com.dbms.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,19 +12,20 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
     private UsersRepository usersRepository;
 
-//    @Autowired
-//    public void setMovieRepository(UsersRepository usersRepository) {
-//        this.usersRepository = usersRepository;
-//    }
+    @Autowired
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
     @Override
     public Users findByUsername(String username) {
+        System.out.println(username);
         return usersRepository.findByUsername(username);
     }
-    @Override
-    public Iterable<Users> findAll() {
-        return usersRepository.findAll();
-    }
+//    @Override
+//    public Iterable<Urs> findAll() {
+//        return ursRepository.findAll();
+//    }
 //    @Override
 //    public boolean setPassword(String username, String password) {
 //        return usersRepository.setPassword(username,password);
@@ -34,18 +34,21 @@ public class UserServiceImpl implements UserService{
 //    public boolean insertUser(String username, String password, String email, String firstname, String lastname){
 //        return usersRepository.insertUser(username,password,email,firstname,lastname);
 //    }
-    @Override
-    public boolean matchPassword(String username, String password) {
-        System.out.println(username);
-        Users user = usersRepository.findOne();
-        System.out.println(user.getPassword());
-        if (user == null) {
-            return false;
-        } else if (user.getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+
+
+//    @Override
+//    public boolean matchPassword(String username, String password) {
+//        System.out.println(username);
+//        IterUsers user = usersRepository.findByUsername(username);
+//        System.out.println(user.getPassword());
+//        if (user == null) {
+//            return false;
+//        } else if (user.getPassword().equals(password)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
 }
