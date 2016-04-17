@@ -1,10 +1,8 @@
 package com.dbms.repositories;
 
-import com.dbms.domain.Pictures;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import com.dbms.domain.Movie;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,12 +17,12 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
     public Movie findMovieByTitle(@Param("title") String title);
 
     @Query ("select movie from Movie movie join movie.pictures picture" +
-            " where movie.director like :director order by movie.rating desc, movie.title asc")
-    public List<Movie> findByDirector(@Param("director") String director);
+            " where movie.director like CONCAT('%', :director, '%') order by movie.rating desc, movie.title asc")
+    public List<Movie> findByDirector(@Param("director") String director, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture" +
-            " where movie.company like :company order by movie.rating desc, movie.title asc")
-    public List<Movie> findByCompany(@Param("company") String company);
+            " where movie.company like CONCAT('%', :company, '%') order by movie.rating desc, movie.title asc")
+    public List<Movie> findByCompany(@Param("company") String company, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture" +
             " where movie.genre = :genre order by movie.rating desc, movie.title asc")
@@ -39,33 +37,30 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
     public List<Movie> findByLength(@Param("length") int length, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture" +
-            " where movie.title like :title")
-    public List<Movie> findByFuzzyTitle(@Param("title") String title);
+            " where movie.title like CONCAT('%', :title, '%')")
+    public List<Movie> findByFuzzyTitle(@Param("title") String title, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture join movie.actorGenreMovie actorGenreMovie" +
-            " where actorGenreMovie.actor like :actor order by movie.rating desc, movie.title asc")
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') order by movie.rating desc, movie.title asc")
     public List<Movie> findByActor(@Param("actor") String actor, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture join movie.actorGenreMovie actorGenreMovie" +
-            " where movie.year = :year and actorGenreMovie.actor like :actor order by movie.rating desc, movie.title asc")
+            " where movie.year = :year and actorGenreMovie.actor like CONCAT('%', :actor, '%') order by movie.rating desc, movie.title asc")
     public List<Movie> findByActorAndYear(@Param("actor") String actor, @Param("year") int year, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
-            " where actressGenreMovie.actress like :actress order by movie.rating desc, movie.title asc")
+            " where actressGenreMovie.actress like CONCAT('%', :actress, '%') order by movie.rating desc, movie.title asc")
     public List<Movie> findByActress(@Param("actress") String actress, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
             " join movie.actorGenreMovie actorGenreMovie" +
-            " where actorGenreMovie.actor like :actor and actressGenreMovie.actress like :actress order by movie.rating desc, movie.title asc")
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and actressGenreMovie.actress like CONCAT('%', :actress, '%') order by movie.rating desc, movie.title asc")
     public List<Movie> findByActressAndActor(@Param("actress") String actress,@Param("actor") String actor, Pageable pageRequest);
 
     @Query ("select movie from Movie movie join movie.pictures picture" +
             " join movie.actorGenreMovie actorGenreMovie" +
-            " where actorGenreMovie.actor like :actor and actorGenreMovie.genre = :genre order by movie.rating desc, movie.title asc")
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and actorGenreMovie.genre = :genre order by movie.rating desc, movie.title asc")
     public List<Movie> findByActorAndGenre(@Param("actor") String actor,@Param("genre") String genre, Pageable pageRequest);
-
-
-
 
     @Query("select movie from Movie movie join movie.pictures pictures join movie.ratings ratings " +
             "where ratings.rating >= :rating AND " +
@@ -76,6 +71,80 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
             "where " +
             "ratings.votes >:votes order by ratings.rating DESC" )
     public List<Movie> findByTopVotes(@Param("votes") int votes, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie" +
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%') " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByActorOrActress(@Param("actor") String actor,Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where movie.title like CONCAT('%', :title, '%') and " +
+            "ratings.rating > :rating " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByTitleAndRating(@Param("title") String title,@Param("rating") float rating, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie" +
+            " where movie.title like CONCAT('%', :title, '%') and actorGenreMovie.actor like CONCAT('%', :actor, '%') and " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%') " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByTitleAndActor(@Param("title") String title,@Param("actor") String actor, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie" +
+            " where movie.title = :title AND movie.director = :director "+
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByTitleAndDirector(@Param("title") String title,@Param("director") String director, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%') and ratings.rating > :rating " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByRatingAndActor(@Param("rating") float rating,@Param("actor") String actor, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where ratings > :rating and movie.director = :director " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByRatingAndDirector(@Param("rating") float rating, @Param("director") String director,Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%') and movie.title = :title and ratings.rating >= :rating " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByTitleAndRatingAndActor(@Param("title") String title,@Param("rating") float rating,@Param("actor") String actor, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where movie.director = :director and movie.title = :title and ratings.rating >= :rating " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByTitleAndRatingAndDirector(@Param("title") String title,@Param("rating") float rating,@Param("director") String director, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%') and movie.title = :title and movie.director = :director " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByTitleAndActorAndDirector(@Param("title") String title,@Param("actor") String actor,@Param("director") String director, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%') and ratings.rating >= :rating and movie.director = :director " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByRatingAndActorAndDirector(@Param("rating") float rating,@Param("actor") String actor,@Param("director") String director, Pageable pageRequest);
+
+    @Query ("select movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where actorGenreMovie.actor like CONCAT('%', :actor, '%') and " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%') and movie.title = :title and ratings.rating >= :rating and movie.director = :director " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findByTitleAndRatingAndActorAndDirector(@Param("title") String title, @Param("rating") float rating,@Param("actor") String actor,@Param("director") String director, Pageable pageRequest);
 
 
 //    @Query("select movie from Movie movie join movie.pictures pictures where " +

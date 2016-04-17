@@ -23,12 +23,12 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public List<Movie> findByDirector(String director) {
-        return movieRepository.findByDirector(director);
+    public List<Movie> findByDirector(String director,Pageable pageRequest) {
+        return movieRepository.findByDirector(director,pageRequest);
     }
     @Override
-    public List<Movie> findByCompany(String company) {
-        return movieRepository.findByCompany(company);
+    public List<Movie> findByCompany(String company, Pageable pageRequest) {
+        return movieRepository.findByCompany(company,pageRequest);
     }
     @Override
     public List<Movie> findByGenre(String genre, Pageable pageRequest) {
@@ -43,8 +43,8 @@ public class MovieServiceImpl implements MovieService{
         return movieRepository.findByLength(length,pageRequest);
     }
     @Override
-    public List<Movie> findByFuzzyTitle(String title) {
-        return movieRepository.findByFuzzyTitle(title);
+    public List<Movie> findByFuzzyTitle(String title, Pageable pageRequest) {
+        return movieRepository.findByFuzzyTitle(title,pageRequest);
     }
     @Override
     public List<Movie> findByActor(String actor, Pageable pageRequest) {
@@ -81,5 +81,49 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public Movie findByTitle(String title) {
         return movieRepository.findMovieByTitle(title);
+    }
+
+    @Override
+    public List<Movie> findByActorOrActress(String actor,Pageable pageRequest) {
+        return movieRepository.findByActorOrActress(actor,pageRequest);
+    }
+    @Override
+    public List<Movie> findByTitleAndRating(String title,float rating,Pageable pageRequest) {
+        return movieRepository.findByTitleAndRating(title,rating,pageRequest);
+    }
+    @Override
+    public List<Movie> findByTitleAndActor(String title,String actor,Pageable pageRequest) {
+        return movieRepository.findByTitleAndActor(title,actor,pageRequest);
+    }
+    @Override
+    public List<Movie> findByTitleAndDirector(String title,String director,Pageable pageRequest) {
+        return movieRepository.findByTitleAndDirector(title,director,pageRequest);
+    }
+    @Override
+    public List<Movie> findByRatingAndActor(float rating, String actor,Pageable pageRequest) {
+        return movieRepository.findByRatingAndActor(rating,actor,pageRequest);
+    }
+    @Override
+    public List<Movie> findByRatingAndDirector(float rating, String director, Pageable pageRequest) {
+        return movieRepository.findByRatingAndDirector(rating,director,pageRequest);
+    }
+    @Override
+    public List<Movie> findByTitleAndRatingAndActor(String title,float rating, String actor, Pageable pageRequest) {
+        return movieRepository.findByTitleAndRatingAndActor(title,rating,actor,pageRequest);
+    }
+    @Override
+    public List<Movie> findByTitleAndRatingAndDirector(String title,float rating,String director, Pageable pageRequest) {
+        return movieRepository.findByTitleAndRatingAndDirector(title,rating,director,pageRequest);
+    }
+    @Override
+    public List<Movie> findByTitleAndActorAndDirector(String title,String actor,String director, Pageable pageRequest) {
+        return movieRepository.findByTitleAndActorAndDirector(title,actor,director,pageRequest);
+    }
+    @Override
+    public List<Movie> findByRatingAndActorAndDirector(float rating,String actor,String director,Pageable pageRequest) {
+        return movieRepository.findByRatingAndActorAndDirector(rating,actor,director,pageRequest);
+    }
+    public List<Movie> findByTitleAndRatingAndActorAndDirector(String title,float rating, String actor, String director, Pageable pageRequest) {
+        return movieRepository.findByTitleAndRatingAndActorAndDirector(title,rating,actor,director,pageRequest);
     }
 }

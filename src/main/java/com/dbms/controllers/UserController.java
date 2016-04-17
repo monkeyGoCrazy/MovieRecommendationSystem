@@ -30,11 +30,6 @@ public class UserController {
     public @ResponseBody Users getUserMovie(@PathVariable String username) {
         return userService.findByUsername(username);
     }
-    @CrossOrigin(origins = "http://localhost:8080")
-    @RequestMapping(value = "user/usermovie/{username}", method = RequestMethod.GET)
-    public @ResponseBody Users getUserFriend(@PathVariable String username) {
-        return userService.findByUsername(username);
-    }
 
 
     @CrossOrigin(origins = "http://localhost:8080")

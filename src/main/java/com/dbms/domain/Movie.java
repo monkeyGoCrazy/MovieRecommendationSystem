@@ -6,6 +6,8 @@ package com.dbms.domain;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @XmlRootElement
@@ -23,7 +25,7 @@ public class Movie {
     private String mpaa;
     private Integer length;
     private String budget;
-    private String productionCompany;
+    private String company;
 
     @OneToOne()
     @JoinColumn(name="title",referencedColumnName = "title")
@@ -33,19 +35,17 @@ public class Movie {
     @JoinColumn(name="title",referencedColumnName = "movietitle")
     private Rating ratings;
 
-    @OneToMany()
-    @JoinColumn(name="title",referencedColumnName = "movie")
-    private ActorGenreMovie actorGenreMovie;
+    @OneToMany(mappedBy="movie", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<ActorGenreMovie> actorGenreMovie;
 
-    @OneToMany()
-    @JoinColumn(name="title",referencedColumnName = "movie")
-    private ActressGenreMovie actressGenreMovie;
+    @OneToMany(mappedBy="movie", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<ActressGenreMovie> actressGenreMovie;
 
-    public void setActressGenreMovie(ActressGenreMovie actressGenreMovie) {this.actressGenreMovie = actressGenreMovie;}
-    public ActressGenreMovie getActressGenreMovie() {return actressGenreMovie;}
+    public void setActressGenreMovie(Set<ActressGenreMovie> actressGenreMovie) {this.actressGenreMovie = actressGenreMovie;}
+    public Set<ActressGenreMovie> getActressGenreMovie() {return actressGenreMovie;}
 
-    public void setActorGenreMovie(ActorGenreMovie actorGenreMovie) {this.actorGenreMovie = actorGenreMovie;}
-    public ActorGenreMovie getActorGenreMovie() {return actorGenreMovie;}
+    public void setActorGenreMovie(Set<ActorGenreMovie> actorGenreMovie) {this.actorGenreMovie = actorGenreMovie;}
+    public Set<ActorGenreMovie> getActorGenreMovie() {return actorGenreMovie;}
 
     public void setRatings(Rating ratings) {this.pictures = pictures;}
     public Rating getRatings() {return ratings;}
@@ -76,7 +76,7 @@ public class Movie {
     public void setLength(Integer length) {this.length = length; }
     public String getBudget() { return this.budget; }
     public void setBudget(String budget) { this.budget = budget; }
-    public String getProductionCompany() { return this.productionCompany;}
-    public void setProductionCompany(String productionCompany) { this.productionCompany = productionCompany; }
+    public String getCompany() { return this.company;}
+    public void setCompany(String company) { this.company = company; }
 
 }
