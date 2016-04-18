@@ -1,10 +1,10 @@
 package com.dbms.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.persistence.Id;
+import java.util.Set;
+
 /**
  * Created by mengleisun on 4/12/16.
  */
@@ -13,12 +13,25 @@ import javax.persistence.Id;
 @Table(name = "Users")
 public class Users {
     @Id
+    @Column(name = "username")
     private String username;
     private String password;
     private String firstname;
     private String lastname;
     private String email;
     private Integer state;
+
+    @OneToMany(mappedBy="username", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<UserMovie> userMovies;
+
+    @OneToMany(mappedBy="username", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<UserActress> userActresses;
+
+    @OneToMany(mappedBy="username", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<UserActor> userActors;
+
+
+
 
     public void setUsername(String username) {
         this.username = username;

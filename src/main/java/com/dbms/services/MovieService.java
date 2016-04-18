@@ -13,6 +13,7 @@ import java.util.List;
 
 public interface MovieService {
     Movie findByTitle(String title);
+    List<Movie> findByActorAndDirector(String actor,String director,Pageable pageRequest);
     List<Movie> findByDirector(String director, Pageable pageRequest);
     List<Movie> findByCompany(String company, Pageable pageRequest);
     List<Movie> findByGenre(String genre, Pageable pageRequest);

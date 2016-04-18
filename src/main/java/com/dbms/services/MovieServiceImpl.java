@@ -23,6 +23,11 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
+    public List<Movie> findByActorAndDirector(String actor,String director,Pageable pageRequest) {
+        return movieRepository.findByActorAndDirector(actor,director,pageRequest);
+    }
+
+    @Override
     public List<Movie> findByDirector(String director,Pageable pageRequest) {
         return movieRepository.findByDirector(director,pageRequest);
     }

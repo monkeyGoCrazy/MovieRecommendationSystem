@@ -1,6 +1,8 @@
 package com.dbms.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -12,10 +14,13 @@ import java.util.Date;
 
 @Entity
 @XmlRootElement
+@Table(name = "UserMovie")
 public class UserMovie implements Serializable {
     @Id
+    @Column(name = "username")
     private String username;
     @Id
+    @Column(name = "movie")
     private String movie;
     private Date searchDate;
 

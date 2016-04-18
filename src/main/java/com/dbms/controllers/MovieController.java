@@ -71,6 +71,11 @@ public class MovieController {
                 && !actor.equals("undefined")
                 && director.equals("undefined")) {
             return movieService.findByRatingAndActor(Float.parseFloat(rating),actor,new PageRequest(0,20));
+        }else if (title.equals("undefined")
+                && rating.equals("undefined")
+                && !actor.equals("undefined")
+                && !director.equals("undefined")) {
+            return movieService.findByActorAndDirector(actor,director,new PageRequest(0,20));
         } else if (title.equals("undefined")
                 && !rating.equals("undefined")
                 && actor.equals("undefined")
@@ -104,6 +109,12 @@ public class MovieController {
         } else {
             return null;
         }
+    }
+    @CrossOrigin(origins = "http://localhost:8080")
+    @RequestMapping(value = "search/advanced/{}", method = RequestMethod.GET)
+    public @ResponseBody Page<Movie> findAdvancedInfo(@PathVariable int page) {
+        Page<Movie> movies = movieService.findAll(new PageRequest(page,20));
+        return movies;
     }
 
 
