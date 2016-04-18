@@ -39,7 +39,7 @@ public class UserController {
         }
     }
 
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody boolean login(@RequestHeader("Authorization") String sessionId,@RequestBody Users user) {
         if (userService.matchPassword(user.getUsername(),user.getPassword())) {

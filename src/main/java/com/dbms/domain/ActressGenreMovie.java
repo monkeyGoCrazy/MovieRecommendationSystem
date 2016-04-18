@@ -15,7 +15,7 @@ import java.util.Date;
 public class ActressGenreMovie implements Serializable {
     @Id
     private String actress;
-    @Id
+  //  @Id
     @Column(name = "movie")
     private String movie;
     private String genre;

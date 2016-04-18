@@ -19,7 +19,7 @@ public class LikeMovie implements Serializable {
     @Id
     @Column(name = "username")
     private String username;
-    @Id
+   // @Id
     private String movie;
     private Date likedate;
 

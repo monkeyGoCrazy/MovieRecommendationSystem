@@ -18,7 +18,6 @@ public class UserMovie implements Serializable {
     private String username;
     @Column(name = "movie")
     private String movie;
-    @Id
     @Column(name = "searchdate")
     private Date searchdate;
 

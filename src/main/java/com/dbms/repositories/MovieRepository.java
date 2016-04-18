@@ -19,6 +19,8 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
     @Query("select count (movie) from Movie movie")
     public int findTotal();
 
+    
+
 
     @Query ("select distinct movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
             " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +

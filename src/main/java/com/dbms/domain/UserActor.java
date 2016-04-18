@@ -17,7 +17,6 @@ public class UserActor implements Serializable {
     @Column(name = "username")
     private String username;
     private String actor;
-    @Id
     @Column(name ="searchdate")
     private Date searchdate;
 

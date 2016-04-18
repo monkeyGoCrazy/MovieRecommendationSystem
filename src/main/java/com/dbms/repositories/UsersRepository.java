@@ -12,6 +12,9 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface UsersRepository extends PagingAndSortingRepository<Users,Integer> {
 
+    @Query("select count (users) from Users users")
+    public int findTotal();
+
     @Query("select users from Users users where users.username = :username")
     public Users findByUsername(@Param("username") String username);
 
