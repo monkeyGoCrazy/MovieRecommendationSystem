@@ -16,6 +16,34 @@ import java.util.List;
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Integer> {
     public Movie findMovieByTitle(@Param("title") String title);
 
+    @Query("select count (movie) from Movie movie")
+    public int findTotal();
+
+
+    @Query ("select distinct movie from Movie movie join movie.pictures picture join movie.actressGenreMovie actressGenreMovie" +
+            " join movie.actorGenreMovie actorGenreMovie join movie.ratings ratings" +
+            " where (actorGenreMovie.actor like CONCAT('%', :actor, '%') or " +
+            "actressGenreMovie.actress like CONCAT('%', :actor, '%')) and " +
+            "movie.title like CONCAT('%', :title, '%') and " +
+            "ratings.rating >= :rating and " +
+            "movie.director like CONCAT('%', :director, '%') and " +
+            "movie.company like CONCAT('%', :company, '%') and " +
+            "movie.genre like CONCAT('%', :genre, '%') and " +
+            "movie.language like CONCAT('%', :language, '%') and " +
+            "movie.year like CONCAT('%', :year, '%') and " +
+            "movie.length < :length " +
+            "order by movie.rating desc, movie.title asc")
+    public List<Movie> findAdvancedInfo(@Param("title") String title,
+                                        @Param("rating") float rating,
+                                        @Param("actor") String actor,
+                                        @Param("director") String director,
+                                        @Param("company") String company,
+                                        @Param("genre") String genre,
+                                        @Param("language") String language,
+                                        @Param("year") String year,
+                                        @Param("length") int length,
+                                        Pageable pageRequest);
+
     @Query ("select movie from Movie movie join movie.pictures picture" +
             " where movie.director like CONCAT('%', :director, '%') order by movie.rating desc, movie.title asc")
     public List<Movie> findByDirector(@Param("director") String director, Pageable pageRequest);

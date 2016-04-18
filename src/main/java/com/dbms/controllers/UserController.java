@@ -20,23 +20,31 @@ public class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
+
     @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "user/username/{username}", method = RequestMethod.GET)
     public @ResponseBody Users getUser(@PathVariable String username) {
         return userService.findByUsername(username);
     }
+
     @CrossOrigin(origins = "http://localhost:8080")
-    @RequestMapping(value = "user/usermovie/{username}", method = RequestMethod.GET)
-    public @ResponseBody Users getUserMovie(@PathVariable String username) {
-        return userService.findByUsername(username);
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    public @ResponseBody Users getUserMovie(@RequestHeader("Authorization") String sessionId) {
+        if (!session.containsKey(sessionId)) {
+            return null;
+        } else {
+            System.out.println(session.get(sessionId));
+            return userService.findAllInfoByUsername(session.get(sessionId));
+        }
     }
 
 
-    @CrossOrigin(origins = "http://localhost:8080")
-    @RequestMapping(value = "/login/username/{username}/password/{password}", method = RequestMethod.GET)
-    public @ResponseBody boolean login(@RequestHeader("Authorization") String sessionId, @PathVariable("username") String username, @PathVariable("password") String password) {
-        if (userService.matchPassword(username,password)) {
-            session.put(sessionId,username);
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public @ResponseBody boolean login(@RequestHeader("Authorization") String sessionId,@RequestBody Users user) {
+        if (userService.matchPassword(user.getUsername(),user.getPassword())) {
+            session.put(sessionId,user.getUsername());
+            System.out.println(sessionId+" "+user.getUsername());
             return true;
         } else {
             return false;

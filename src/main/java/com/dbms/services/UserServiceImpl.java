@@ -18,6 +18,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Users findAllInfoByUsername(String username) {
+        return usersRepository.findAllInfoByUsername(username);
+    }
+
+    @Override
     public Users findByUsername(String username) {
         System.out.println(username);
         return usersRepository.findByUsername(username);

@@ -16,14 +16,14 @@ public class UserActress implements Serializable {
     @Id
     @Column(name = "username")
     private String username;
-    @Id
     private String actress;
-    private Date searchDate;
+    @Column(name = "searchdate")
+    private Date searchdate;
 
     public void setUsername(String username) {this.username = username;}
     public String getUsername() { return this.username; }
     public void setActress(String actress) { this.actress = actress;}
     public String getActress() {return this.actress;}
-    public void setSearchDate(Date searchDate) { this.searchDate = searchDate;}
-    public Date getSearchDate() {return this.searchDate;}
+    public void setSearchdate(Date searchdate) { this.searchdate = searchdate;}
+    public Date getSearchdate() {return this.searchdate;}
 }

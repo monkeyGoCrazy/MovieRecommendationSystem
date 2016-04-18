@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Entity
 @XmlRootElement
-@Table(name = "likeMovie")
+@Table(name = "LikeMovie")
 public class LikeMovie implements Serializable {
     @Id
     @Column(name = "username")

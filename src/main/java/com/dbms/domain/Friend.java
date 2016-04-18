@@ -19,7 +19,8 @@ public class Friend implements Serializable {
     @Id
     @Column(name ="username")
     private String username;
-    @Id
+
+    @Column(name = "friendname")
     private String friendname;
 
     public void setUsername(String username) {this.username = username;}

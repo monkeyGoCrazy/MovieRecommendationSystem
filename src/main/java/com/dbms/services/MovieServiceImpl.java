@@ -23,6 +23,45 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
+    public List<Movie> findAdvancedInfo(String title, String rating, String actor, String director, String company,
+                                          String genre, String language, String year, String length, Pageable pageRequest) {
+        float rating1 = 0;
+        int length1 = 500;
+        if (title.equals("undefined")) {
+            title = "";
+        }
+        if (rating.equals("undefined")) {
+            rating1 = 0;
+        } else {
+            rating1 = Float.parseFloat(rating);
+        }
+        if (actor.equals("undefined")) {
+            actor = "";
+        }
+        if (director.equals("undefined")) {
+            director = "";
+        }
+        if (company.equals("undefined")) {
+            company = "";
+        }
+        if (genre.equals("undefined")) {
+            genre = "";
+        }
+        if (language.equals("undefined")) {
+            language = "";
+        }
+        if (year.equals("undefined")) {
+            year = "";
+        }
+        if (length.equals("undefined")) {
+            length1 = 500;
+        } else {
+            length1 = Integer.parseInt(length);
+        }
+        return movieRepository.findAdvancedInfo(title,rating1,actor,director,company,genre,language,year,length1,pageRequest);
+    }
+
+    @Override
     public List<Movie> findByActorAndDirector(String actor,String director,Pageable pageRequest) {
         return movieRepository.findByActorAndDirector(actor,director,pageRequest);
     }

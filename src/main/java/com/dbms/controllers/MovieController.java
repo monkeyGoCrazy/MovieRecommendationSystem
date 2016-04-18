@@ -112,9 +112,16 @@ public class MovieController {
     }
     @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "search/advanced/{title}/{rating}/{actor}/{director}/{company}/{genre}/{language}/{year}/{length}", method = RequestMethod.GET)
-    public @ResponseBody Page<Movie> findAdvancedInfo(@PathVariable int page) {
-        Page<Movie> movies = movieService.findAll(new PageRequest(page,20));
-        return movies;
+    public @ResponseBody List<Movie> findAdvancedInfo(@PathVariable("title") String title,
+                                                      @PathVariable("rating") String rating,
+                                                      @PathVariable("actor") String actor,
+                                                      @PathVariable("director") String director,
+                                                      @PathVariable("company") String company,
+                                                      @PathVariable("genre") String genre,
+                                                      @PathVariable("language") String language,
+                                                      @PathVariable("year") String year,
+                                                      @PathVariable("length") String length) {
+        return movieService.findAdvancedInfo(title,rating,actor,director,company,genre,language,year,length,new PageRequest(0,20));
     }
 
 

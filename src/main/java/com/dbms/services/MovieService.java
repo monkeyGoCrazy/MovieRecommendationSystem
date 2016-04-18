@@ -39,6 +39,8 @@ public interface MovieService {
     List<Movie> findByTitleAndActorAndDirector(String title,String actor,String director, Pageable pageRequest);
     List<Movie> findByRatingAndActorAndDirector(float rating,String actor,String director,Pageable pageRequest);
     List<Movie> findByTitleAndRatingAndActorAndDirector(String title,float rating, String actor, String director, Pageable pageRequest);
+    List<Movie> findAdvancedInfo(String title, String rating, String actor, String director, String company,
+                                 String genre, String language, String year, String length, Pageable pageRequest);
 
 //    Movie saveMovie(Movie movie);
 //    void deleteMovie(Integer mid);
