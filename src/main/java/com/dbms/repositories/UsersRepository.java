@@ -18,7 +18,7 @@ public interface UsersRepository extends PagingAndSortingRepository<Users,Intege
     @Query("select users from Users users where users.username = :username")
     public Users findByUsername(@Param("username") String username);
 
-    @Query("select users from Users users left join users.userMovies userMovies join userMovies.movieInfo " +
+    @Query("select users from Users users left join users.userMovies userMovies left join userMovies.movieInfo " +
             "left join users.userActresses userActresses left join users.userActors userActors " +
             "left join users.likeMovies likeMovies left join users.friends friends where " +
             "users.username = :username")

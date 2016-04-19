@@ -34,7 +34,7 @@ public class UserController {
         if (!session.containsKey(sessionId)) {
             return null;
         } else {
-            System.out.println(session.get(sessionId));
+            System.out.println(session.get(sessionId)+"11111");
             return userService.findAllInfoByUsername(session.get(sessionId));
         }
     }
